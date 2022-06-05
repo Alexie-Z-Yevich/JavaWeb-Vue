@@ -1,0 +1,32 @@
+{
+  "name": "vue3_cli_default",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^1.1.4",
+    "axios": "^0.27.2",
+    "echarts": "^5.3.2",
+    "element-plus": "^2.1.11",
+    "got": "^12.0.4",
+    "mockjs": "^1.1.0",
+    "module": "^1.0.0",
+    "qs": "^6.10.3",
+    "require.js": "^1.0.0",
+    "vue": "^3.2.8",
+    "vue-axios": "^3.4.1",
+    "vue-router": "^4.0.13",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.31",
+    "@vitejs/plugin-vue": "^1.6.0",
+    "@vue/compiler-sfc": "^3.2.6",
+    "unplugin-auto-import": "^0.7.1",
+    "unplugin-vue-components": "^0.19.3",
+    "vite": "^2.5.2"
+  }
+}
