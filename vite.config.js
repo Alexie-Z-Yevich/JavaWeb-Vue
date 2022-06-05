@@ -17,6 +17,18 @@ export default defineConfig({
         fs: {
             strict: false
         }
+    },
+    build: {
+        chunkSizeWarningLimit:2000,
+        rollupOptions: {
+            output: {
+                //解决打包时Some chunks are larger警告
+                manualChunks(id) {
+                    if (id.includes('node_modules')) {
+                        return id.toString().split('node_modules/')[1].split('/')[0].toString();
+                    }
+                }
+            }
+        }
     }
-
 })
