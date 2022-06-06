@@ -16,30 +16,30 @@ request.interceptors.request.use(config => {
     return config
 })
 
-// request.interceptors.response.use(
-//     response => {
-//         console.log("response ->" + response)
-//         let res = response.data
-//         if (res.code === 200) {
-//             return response
-//         } else {
-//             ElMessage.error(res.msg||'系统异常')
-//             return Promise.reject(response.data.msg)
-//         }
-//     },
-//         error => {
-//         console.log(error)
-//
-//         if (error.response.data) {
-//             error.massage = error.response.data.msg
-//         }
-//         if (error.response.status === 401) {
-//             router.push('/login')
-//         }
-//
-//         ElMessage.error(error.massage, {duration: 3000})
-//         return Promise.reject(error)
-//     }
-// )
+request.interceptors.response.use(
+    response => {
+        console.log("response ->" + response)
+        let res = response.data
+        if (res.code === 200) {
+            return response
+        } else {
+            ElMessage.error(res.msg||'系统异常')
+            return Promise.reject(response.data.msg)
+        }
+    },
+        error => {
+        console.log(error)
+
+        if (error.response.data) {
+            error.massage = error.response.data.msg
+        }
+        if (error.response.status === 401) {
+            router.push('/login')
+        }
+
+        ElMessage.error(error.massage, {duration: 3000})
+        return Promise.reject(error)
+    }
+)
 
 export default request
