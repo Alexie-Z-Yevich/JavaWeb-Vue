@@ -2,8 +2,8 @@ import axios from "axios";
 import router from "./router";
 import {ElMessage} from "element-plus";
 
-// axios.defaults.baseURL = "http://localhost:8081/";
-axios.defaults.baseURL = "http://www.fenrisx.top:8081/";
+axios.defaults.baseURL = "http://localhost:8081/";
+// axios.defaults.baseURL = "http://www.fenrisx.top:8081/";
 const request = axios.create({
     timeout: 50000,
     headers: {
@@ -18,13 +18,16 @@ request.interceptors.request.use(config => {
 
 request.interceptors.response.use(
     response => {
-        console.log("response ->" + response)
-        let res = response.data
-        if (res.code === 200) {
-            return response
-        } else {
-            ElMessage.error(res.msg||'系统异常')
-            return Promise.reject(response.data.msg)
+        if(response.data.type == "application/octet-stream"){
+            return response;
+        }else{
+            let res = response.data
+            if (res.code === 200) {
+                return response
+            } else {
+                ElMessage.error(res.msg||'系统异常')
+                return Promise.reject(response.data.msg)
+            }
         }
     },
         error => {

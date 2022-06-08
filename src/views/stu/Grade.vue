@@ -85,7 +85,7 @@
   <el-dialog
       title="学生信息"
       v-model="dialogVisible"
-      width="600px">
+      width="660px">
 
     <template #footer>
       <div class="common-layout">
