@@ -42,10 +42,10 @@
 </template>
 
 <script>
-import {Expand, HomeFilled, List, Avatar, Tools, Rank, Menu, Checked, Histogram, Grid, School} from "@element-plus/icons-vue";
+import {Expand, HomeFilled, List, Avatar, Tools, Rank, Menu, Checked, Histogram, Grid, School, Management, Switch, Medal, WarningFilled} from "@element-plus/icons-vue";
 export default {
   name: "SideMenu",
-  components: {HomeFilled, Expand, List, Avatar, Tools, Rank, Menu, Checked, Histogram, Grid, School  },
+  components: {HomeFilled, Expand, List, Avatar, Tools, Rank, Menu, Checked, Histogram, Grid, School, Management, Switch, Medal, WarningFilled},
   data() {
     return {
     }

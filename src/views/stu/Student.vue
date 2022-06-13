@@ -50,10 +50,6 @@
           label="姓名">
       </el-table-column>
       <el-table-column
-          prop="className"
-          label="班级">
-      </el-table-column>
-      <el-table-column
           prop="sex"
           label="性别">
       </el-table-column>
@@ -65,14 +61,21 @@
           prop="nativePlace"
           label="籍贯">
       </el-table-column>
+      <el-table-column
+          prop="className"
+          label="班级">
+      </el-table-column>
+      <el-table-column
+          prop="deptName"
+          label="学院">
+      </el-table-column>
 
       <el-table-column
           prop="statu"
-          label="状态">  <!--记录学生状态：在读/休学/退学，内容从表单获取-->
+          label="职位">  <!--记录学生状态：在读/休学/退学，内容从表单获取-->
         <template v-slot="scope">
-          <el-tag size="small" v-if="scope.row.statu === '在读'" type="success">在读</el-tag>
-          <el-tag size="small" v-else-if="scope.row.statu === '休学'" type="warning">休学</el-tag>
-          <el-tag size="small" v-else-if="scope.row.statu === '退学'" type="danger">退学</el-tag>
+          <el-tag size="large" v-if="scope.row.statu === 0" type="success">班长</el-tag>
+          <el-tag size="small" v-if="scope.row.statu === 1" type="info">班级成员</el-tag>
         </template>
       </el-table-column>
 
@@ -96,16 +99,6 @@
       </el-table-column>
 
     </el-table>
-
-    <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        layout="total, sizes, prev, pager, next, jumper"
-        :page-sizes="[10, 20, 50, 100]"
-        :current-page="current"
-        :page-size="size"
-        :total="total">
-    </el-pagination>
 
     <!--新增对话框-->
     <el-dialog
@@ -153,11 +146,10 @@
           </el-date-picker>
         </el-form-item>
 
-        <el-form-item label="状态" prop="label" label-width="100px">
-          <el-radio-group v-model="editForm.label">
-            <el-radio :label="0">在读</el-radio>
-            <el-radio :label="1">休学</el-radio>
-            <el-radio :label="2">退学</el-radio>
+        <el-form-item label="职位" prop="label" label-width="100px">
+          <el-radio-group v-model="editForm.statu">
+            <el-radio :label="0">班长</el-radio>
+            <el-radio :label="1">班级成员</el-radio>
           </el-radio-group>
         </el-form-item>
 
@@ -185,6 +177,7 @@ export default {
         }
       ],
       options: {},
+      deptClass: {},
       searchForm: {},
       delBtlStatu: true,
 
@@ -213,9 +206,6 @@ export default {
         className: [
           {required: true, message: '请输入班级', trigger: 'blur'}
         ],
-        label: [
-          {required: true, message: '请选择状态', trigger: 'blur'}
-        ],
         sex: [
           {required: true, message: '请选择性别', trigger: 'blur'}
         ]
@@ -237,7 +227,6 @@ export default {
   },
   methods: {
     getAllClass() {
-
       this.axios.get("/stu/student/class").then(res => {
         this.options = res.data.data
       })
@@ -255,7 +244,6 @@ export default {
       console.log("勾选")
       console.log(val)
       this.multipleSelection = val;
-
       this.delBtlStatu = val.length == 0
     },
 
@@ -281,8 +269,6 @@ export default {
       this.axios.get("/stu/student/list", {
         params: {
           s_name: this.searchForm.sname,
-          current: this.current,
-          size: this.size
         }
       }).then(res => {
         if (res.data.data.records == null || res.data.data.records == "") {
@@ -298,9 +284,6 @@ export default {
         } else {
           this.tableData = res.data.data.records
         }
-        this.size = res.data.data.size
-        this.current = res.data.data.current
-        this.total = res.data.data.total
       })
     },
     editHandle(id) {  // 回显
@@ -331,6 +314,7 @@ export default {
     },
     submitForm(formName) {  // 新增&更新
       this.$refs[formName].validate((valid) => {
+        console.log(this.editForm)
         if (valid) {
           this.axios.post('/stu/student/' + (this.editForm.id ? 'update' : 'save'), this.editForm)
               .then(res => {
@@ -340,6 +324,7 @@ export default {
                   type: 'success',
                   onClose: () => {
                     this.getUserList()
+                    this.editForm = {}
                   }
                 });
                 this.dialogVisible = false

@@ -9,6 +9,9 @@ import UserCenter from '../views/UserCenter.vue'
 import Student from '../views/stu/Student.vue'
 import Grade from '../views/stu/Grade.vue'
 import Push from '../views/stu/Push.vue'
+import Change from '../views/sta/Change.vue'
+import Reward from '../views/sta/Reward.vue'
+import Punish from '../views/sta/Punish.vue'
 import axios from "../axios";
 import store from '../store'
 
@@ -76,21 +79,37 @@ const routes = [
                 component: Grade
             },
             {
-                path: '/test',
-                name: 'Test',
-                meta: {
-                    title: '测试'
-                },
-                component: () => import('../views/inc/test.vue')
-            },
-            {
                 path: '/stu/pushs',
                 name: 'StuPush',
                 meta: {
                     title: '成绩录入'
                 },
                 component: Push
-            }
+            },
+            {
+                path: '/sta/changes',
+                name: 'StaChange',
+                meta: {
+                    title: '学籍变更'
+                },
+                component: Change
+            },
+            {
+                path: '/sta/rewards',
+                name: 'StaReward',
+                meta: {
+                    title: '学生奖励'
+                },
+                component: Reward
+            },
+            {
+                path: '/sta/punishs',
+                name: 'StaPunish',
+                meta: {
+                    title: '学生处罚'
+                },
+                component: Punish
+            },
         ]
     },
 
