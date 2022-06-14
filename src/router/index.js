@@ -12,6 +12,8 @@ import Push from '../views/stu/Push.vue'
 import Change from '../views/sta/Change.vue'
 import Reward from '../views/sta/Reward.vue'
 import Punish from '../views/sta/Punish.vue'
+import ApplyStudent from '../views/apply/Student.vue'
+import ApplyTeacher from '../views/apply/Teacher.vue'
 import axios from "../axios";
 import store from '../store'
 
@@ -109,6 +111,22 @@ const routes = [
                     title: '学生处罚'
                 },
                 component: Punish
+            },
+            {
+                path: '/lea/students',
+                name: 'LeaStudent',
+                meta: {
+                    title: '学生请假'
+                },
+                component: ApplyStudent
+            },
+            {
+                path: '/lea/teachers',
+                name: 'LeaTeacher',
+                meta: {
+                    title: '假条批阅'
+                },
+                component: ApplyTeacher
             },
         ]
     },
