@@ -13,7 +13,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="详细理由">
-          <el-input type="text" v-model="editForm.password" autocomplete="off"></el-input>
+          <el-input type="text" v-model="editForm.description"></el-input>
         </el-form-item>
 
         <el-form-item>
